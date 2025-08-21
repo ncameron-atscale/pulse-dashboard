@@ -1,3 +1,39 @@
+==== Dev Server Report ====
+Thu Aug 21 12:11:33 CDT 2025
+
+Node: v22.17.0
+npm: 10.9.2
+Next: 
+
+Working Dir: /Users/nate/Desktop/VIBE/pulse-dashboard
+Local URL: http://localhost:3000
+
+--- Environment (selected) ---
+
+--- Health checks ---
+GET / -> 200
+GET /api/db-check -> {"ok":false,"error":"Connection terminated due to connection timeout","ms":3003}
+
+--- Last 200 lines of /tmp/next-log ---
+
+> pulse-dashboard@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.14:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1330ms
+ ○ Compiling /api/db-check ...
+ ✓ Compiled /api/db-check in 665ms (366 modules)
+ GET /api/db-check 500 in 3790ms
+ ✓ Compiled in 201ms (87 modules)
+ ✓ Compiled in 12ms
+[?25h
+
+--- package.json scripts ---
 {
   "name": "pulse-dashboard",
   "version": "0.1.0",
