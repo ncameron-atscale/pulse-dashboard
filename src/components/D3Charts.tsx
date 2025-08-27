@@ -340,6 +340,9 @@ export function SimpleBarChart({ title, values, centerTitle = false }: { title: 
       svg.selectAll("*").remove();
       svg.attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`);
 
+      
+
+
       const x = d3.scaleBand().domain(values.map((_, i) => String(i))).range([0, width]).padding(0.2);
       const y = d3.scaleLinear().domain([0, d3.max(values) as number]).nice().range([height, 0]);
 

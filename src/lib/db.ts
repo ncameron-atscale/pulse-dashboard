@@ -1,36 +1,33 @@
-import { Client, Connection } from "pg";
+import postgres from 'postgres'
 
-type PoolConfigKey = string; // host|port|ssl
 
-var client: Client;
+const sql = postgres({
+  host: "172.210.83.204",
+  port: 10520,
+  user: "atscale",
+  password: process.env.PGPASSWORD,
+  database: "Telemetry",
+});
 
-function getConnection(): Client {
-  if (client != null) 
-      return client;
-
-  client =  new Client({
-    host: "172.210.83.204",
-    port: 15432,
-    user: "admin",
-    password: process.env.PGPASSWORD,
-    database: "Telemetry",
-    connectionTimeoutMillis: 1000,
-  });
-
-  client.connect();
-
-  return client;
-}
+// const sql = postgres({
+//   host: "172.210.83.204",
+//   port: 15432,
+//   user: "admin",
+//   password: process.env.PGPASSWORD,
+//   database: "Telemetry",
+// });
 
 export async function query<T = any>(text: string, params?: any[]): Promise<any> {
-  const connection = getConnection();
   try {
-        // await connection.query('SET statement_timeout TO 8000');
-        const res = connection.query(text);
-        return res
-    } catch (err) {
-      console.log(text);
-      console.log(err);
-      return {rows:[]};
-    }
+    console.log(process.env.PGPASSWORD);
+    // await connection.query('SET statement_timeout TO 8000');
+    console.log(text);
+    const res = await sql`select m_epoch_wall_time_avg from Telemetry`;
+    console.log(res);
+    return res
+  } catch (err) {
+    console.log(text);
+    console.log(err);
+    return { rows: [] };
   }
+}
