@@ -1,0 +1,15 @@
+
+<xml>
+    <title><%= definition.title %></title>
+    <% definition.worksheets.map((element, index) => { %>
+        <div>Workbook 1 <%= element.name %></div>
+
+        <% if (element.graphType === 'bar') { %>
+            <barChart>
+            </barChart>
+        <% } else if (element.graphType === 'line') { %>
+            <lineChart>
+            </lineChart>
+        <% } %>
+    <% }) %>
+</xml>
