@@ -1,10 +1,11 @@
 let ejs = require('ejs');
 let fs = require('fs');
+let yaml = require('js-yaml');
 
 var definition = {};
 try {
-    const jsonString = fs.readFileSync(process.argv[2], 'utf8');
-    definition = JSON.parse(jsonString);
+    const yamlString = fs.readFileSync(process.argv[2], 'utf8');
+    definition = yaml.load(yamlString);
 } catch (err) {
     console.error("Error reading or parsing file:", err);
 }
@@ -17,4 +18,10 @@ try {
 }
 
 let output = ejs.render(template, {definition} );
-console.log(output);
+fs.writeFile(process.argv[4], output, err => {
+  if (err) {
+    console.error('Error writing file:', err);
+  } else {
+    console.log('File written successfully!');
+  }
+});
