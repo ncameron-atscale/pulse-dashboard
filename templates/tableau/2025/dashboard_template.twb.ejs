@@ -19,7 +19,7 @@
     <preference name='ui.shelf.height' value='26' />
   </preferences>
   <datasources>
-    <datasource caption='Telemetry (Telemetry)' inline='true' name='federated.0v72u8e00b65q31c2lg341ol9i7l' version='18.1'>
+    <datasource caption='Telemetry (Telemetry)' inline='true' name='ats_connection' version='18.1'>
       <connection class='federated'>
         <named-connections>
           <named-connection caption='jdbc:postgresql://class-i.training.atscale-se-demo.com:15432/Telemetry' name='genericjdbc.0w0lhpd1d6ifhq10hiwbx0augav7'>
@@ -613,9 +613,9 @@
       <table>
         <view>
           <datasources>
-            <datasource name='<%= element.datasource %>' />
+            <datasource name='<%= element.dataSource %>' />
           </datasources>
-          <datasource-dependencies datasource='federated.0v72u8e00b65q31c2lg341ol9i7l'>
+          <datasource-dependencies datasource='<%= element.dataSource %>'>
             <column-instance column='[m_epoch_sql_wall_time_avg]' derivation='Avg' name='[avg:m_epoch_sql_wall_time_avg:qk]' pivot='key' type='quantitative' />
             <column caption='M Epoch Sql Wall Time Avg' datatype='real' name='[m_epoch_sql_wall_time_avg]' role='measure' type='quantitative' />
             <column-instance column='[user_hash]' derivation='None' name='[none:user_hash:nk]' pivot='key' type='nominal' />
@@ -632,10 +632,10 @@
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows>[federated.0v72u8e00b65q31c2lg341ol9i7l].[none:user_hash:nk]</rows>
-        <cols>[federated.0v72u8e00b65q31c2lg341ol9i7l].[avg:m_epoch_sql_wall_time_avg:qk]</cols>
+        <rows>[<%= element.dataSource %>].[none:user_hash:nk]</rows>
+        <cols>[<%= element.dataSource %>].[avg:m_epoch_sql_wall_time_avg:qk]</cols>
       </table>
-      <simple-id uuid='{DDB538CB-BEEA-4A9A-99DB-33CE573301CF}' />
+      <simple-id uuid='{<%= crypto.randomUUID()%>}' />
     </worksheet>
     <% }) %>
   </worksheets>

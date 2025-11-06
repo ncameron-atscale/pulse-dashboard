@@ -206,13 +206,14 @@ calculatedFields:
   appliesTo:
   - kpis
 worksheets:
-- name: KPI - Total UserHash - Patrick
-  dataSource: ats_summary
+- name: KPI - Total UserHash2
+  dataSource: ats_connection
   markType: text
   graphType: bar
-  fields:
-  - name: total_userhash
+  x-axis:
+  - name: user_hash
     role: measure
+    aggregation: none
 dashboard:
   name: Telemetry Overview
   size:
