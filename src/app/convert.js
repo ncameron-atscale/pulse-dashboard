@@ -1,3 +1,6 @@
+const {default:tableau} = require('../../templates/tableau/functions');
+console.log("Tableau functions loaded:", tableau);
+
 let ejs = require('ejs');
 let fs = require('fs');
 let yaml = require('js-yaml');
@@ -9,6 +12,7 @@ try {
 } catch (err) {
     console.error("Error reading or parsing file:", err);
 }
+// console.log("Definition loaded:", definition);
 
 var template = "";
 try {
@@ -17,7 +21,12 @@ try {
     console.error("Error reading or parsing file:", err);
 }
 
-let output = ejs.render(template, {definition} );
+var paths = { projectRoot: __dirname + "/../../",
+              templateRoot: __dirname + "/../../"+process.argv[3]+"/.." };
+
+console.log("Paths:", paths);
+
+let output = ejs.render(template, {functions: {tableau}, paths, visuals:definition, models: definition.models} );
 fs.writeFile(process.argv[4], output, err => {
   if (err) {
     console.error('Error writing file:', err);

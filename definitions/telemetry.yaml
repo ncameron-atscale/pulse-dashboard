@@ -3,313 +3,77 @@ version: 1
 title: Telemetry Dashboard (Tableau Template)
 description: Template for building a Tableau dashboard mirroring the app's KPIs and
   visualizations.
-baseUrl: http://localhost:3000
-parameters:
-  from:
-    type: string
-    format: date
-    default: "{{today-90d}}"
-  to:
-    type: string
-    format: date
-    default: "{{today}}"
-  segment:
-    type: string
-    nullable: true
-    default: ''
-dataSources:
-- name: ats_summary
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/summary?from={from}&to={to}"
-  schema:
-  - name: total_userhash
-    type: number
-  - name: total_organizationalid
-    type: number
-  - name: total_cubesused
-    type: number
-  - name: avg_totalqueries_per_day
-    type: number
-  - name: overall_success_rate
-    type: number
-  - name: overall_avg_walltime
-    type: number
-  primaryKey: []
-- name: kpis
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/kpis?from={from}&to={to}"
-  optionalParams:
-  - segment
-  schema:
-  - name: key
-    type: string
-  - name: value
-    type: number
-  - name: delta
-    type: number
-  primaryKey:
-  - key
-- name: timeseries_revenue
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/timeseries?metric=revenue&from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: metric
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - date
-  - metric
-- name: timeseries_active_users
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/timeseries?metric=active_users&from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: metric
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - date
-  - metric
-- name: timeseries_nps
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/timeseries?metric=nps&from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: metric
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - date
-  - metric
-- name: ats_success_rate
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/success-rate?from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: value
-    type: number
-  primaryKey:
-  - date
-- name: ats_total_queries
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/total-queries?from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: value
-    type: number
-  primaryKey:
-  - date
-- name: ats_response_time
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/response-time?from={from}&to={to}"
-  schema:
-  - name: date
-    type: string
-    format: date
-  - name: value
-    type: number
-  primaryKey:
-  - date
-- name: ats_top_users
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/top?by=users"
-  schema:
-  - name: label
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - label
-- name: ats_top_cubes
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/top?by=cubes"
-  schema:
-  - name: label
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - label
-- name: ats_top_userwall
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/top?by=userwall"
-  schema:
-  - name: label
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - label
-- name: ats_top_orgwall
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/top?by=orgwall"
-  schema:
-  - name: label
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - label
-- name: ats_top_projectwall
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/ats/top?by=projectwall"
-  schema:
-  - name: label
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - label
-- name: funnel
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/funnel?from={from}&to={to}"
-  schema:
-  - name: stage
-    type: string
-  - name: count
-    type: number
-  primaryKey:
-  - stage
-- name: geo
-  type: http_json
-  urlTemplate: "{baseUrl}/api/v1/geo?from={from}&to={to}"
-  schema:
-  - name: region_code
-    type: string
-  - name: value
-    type: number
-  primaryKey:
-  - region_code
-calculatedFields:
-- name: Success Rate %
-  expression: "[value] / 100"
-  format: percent
-  appliesTo:
-  - ats_success_rate
-- name: Delta %
-  expression: "[delta] / 100"
-  format: percent
-  appliesTo:
-  - kpis
+
+connections:
+  ats_connection:
+    connection:
+      type: jdbc
+      url: "{baseUrl}/api/v1/telemetry?from={from}&to={to}&segment={segment}"
+models:
+  telemetry:
+    dataSource: ats_connection
+    sql:
+      tableName: Telemetry
+      columns:
+
+        user_hash:
+          dataType: string
+          label: User Hash
+          role: dimension
+          type: nominal
+          # This field must be title case and will break TWB; needs investigation
+          aggregation: None
+
+        m_epoch_sql_wall_time_avg:
+          dataType: real
+          label: M Epoch Sql Wall Time Avg
+          role: measure
+          type: quantitative
+          # This field must be title case and will break TWB; needs investigation
+          aggregation: Avg
+
+        m_subquery_count_sum:
+          dataType: integer
+          label: M Subquery Count Sum
+          role: measure
+          type: quantitative
+          aggregation: Sum
+
+        query_hour:
+          dataType: datetime
+          label: Query Hour
+          role: dimension
+          type: ordinal
+          aggregation: None
+
 worksheets:
-- name: KPI - Total UserHash2
-  dataSource: ats_connection
-  markType: text
-  graphType: bar
-  x-axis:
-  - name: user_hash
-    role: measure
-    aggregation: none
-dashboard:
-  name: Telemetry Overview
-  size:
-    width: 1400
-    height: 1000
-  tiles:
-  - worksheet: KPI - Total UserHash
-    x: 0
-    "y": 0
-    w: 4
-    h: 1
-  - worksheet: KPI - Total OrganizationalId
-    x: 4
-    "y": 0
-    w: 4
-    h: 1
-  - worksheet: KPI - Total CubesUsed
-    x: 8
-    "y": 0
-    w: 4
-    h: 1
-  - worksheet: KPI - Avg TotalQueries/Day
-    x: 0
-    "y": 1
-    w: 4
-    h: 1
-  - worksheet: KPI - Overall Success Rate
-    x: 4
-    "y": 1
-    w: 4
-    h: 1
-  - worksheet: KPI - Overall Avg WallTime
-    x: 8
-    "y": 1
-    w: 4
-    h: 1
-  - worksheet: Timeseries - Success Rate
-    x: 0
-    "y": 2
-    w: 6
-    h: 2
-  - worksheet: Timeseries - TotalQueries
-    x: 6
-    "y": 2
-    w: 6
-    h: 2
-  - worksheet: Timeseries - ResponseTime
-    x: 0
-    "y": 4
-    w: 6
-    h: 2
-  - worksheet: Bar - Top Users
-    x: 6
-    "y": 4
-    w: 6
-    h: 2
-  - worksheet: Bar - Top Cubes
-    x: 0
-    "y": 6
-    w: 4
-    h: 2
-  - worksheet: Bar - Top User Avg WallTime
-    x: 4
-    "y": 6
-    w: 4
-    h: 2
-  - worksheet: Bar - Top Org Avg WallTime
-    x: 8
-    "y": 6
-    w: 4
-    h: 2
-  - worksheet: Bar - Top Project Avg WallTime
-    x: 0
-    "y": 8
-    w: 6
-    h: 2
-  - worksheet: Geo - Choropleth
-    x: 6
-    "y": 8
-    w: 6
-    h: 2
-  globalFilters:
-  - parameter: from
-    appliesTo:
-    - "*"
-  - parameter: to
-    appliesTo:
-    - "*"
-  - parameter: segment
-    appliesTo:
-    - kpis
-    - timeseries_revenue
-    - timeseries_active_users
-    - timeseries_nps
-notes:
-- If your Tableau environment cannot query REST directly, use a Web Data Connector
-  (WDC) or pre-extract into Hyper.
-- Replace {baseUrl} with your deployed host.
-- All date fields use YYYY-MM-DD.
+  avg_wall_by_userhash:
+    title: Avg Wall by UserHash
+    model: telemetry
+    graphType: bar
+    xAxis: user_hash
+    yAxis: m_epoch_sql_wall_time_avg
+
+  subquery_count_by_hour:
+    title: Subquery Count by Hour
+    model: telemetry
+    graphType: bar
+    xAxis: query_hour
+    yAxis: m_subquery_count_sum
+
+
+dashboards:
+  telemetry_overview:
+    title: Telemetry Overview
+    size:
+      width: 1000
+      height: 800
+      hSegments: 1
+      vSegments: 2
+    tiles:
+    - worksheet: avg_wall_by_userhash
+      x: 0
+      y: 0
+    - worksheet: subquery_count_by_hour
+      x: 0
+      y: 1
