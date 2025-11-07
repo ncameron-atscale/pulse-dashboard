@@ -9,6 +9,8 @@ connections:
     connection:
       type: jdbc
       url: "{baseUrl}/api/v1/telemetry?from={from}&to={to}&segment={segment}"
+
+
 models:
   telemetry:
     dataSource: ats_connection
@@ -61,6 +63,13 @@ worksheets:
     xAxis: query_hour
     yAxis: m_subquery_count_sum
 
+  subquery_count_by_hour_2:
+    title: Subquery Count by Hour 2
+    model: telemetry
+    graphType: bar
+    xAxis: query_hour
+    yAxis: m_subquery_count_sum
+
 
 dashboards:
   telemetry_overview:
@@ -74,6 +83,6 @@ dashboards:
     - worksheet: avg_wall_by_userhash
       x: 0
       y: 0
-    - worksheet: subquery_count_by_hour
+    - worksheet: subquery_count_by_hour_2
       x: 0
       y: 1
