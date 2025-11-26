@@ -1,6 +1,4 @@
-import test from "node:test";
-
-export default {
+module.exports = {
     test: function () {
         console.log("Included function called");
         return "Hello included";
@@ -15,7 +13,7 @@ export default {
         const typeMap = {
             "string": "string",
             "integer": "integer",
-            }
+        };
         return typeMap[typeName] || "unknown";
     }
-}
+};

@@ -48,41 +48,237 @@ models:
           type: ordinal
           aggregation: None
 
+        organization_id:
+          dataType: string
+          label: Organization Id
+          role: dimension
+          type: nominal
+          aggregation: None
+
+        cube_name:
+          dataType: string
+          label: Cube Name
+          role: dimension
+          type: nominal
+          aggregation: None
+
+        project_id:
+          dataType: string
+          label: Project Id
+          role: dimension
+          type: nominal
+          aggregation: None
+
+        succeeded:
+          dataType: string
+          label: Succeeded
+          role: dimension
+          type: nominal
+          aggregation: None
+
 worksheets:
-  avg_wall_by_userhash:
-    title: Avg Wall by UserHash
+  # Summary Statistics
+  summary_total_user_hash:
+    title: Summary Statistics
     model: telemetry
-    graphType: bar
-    xAxis: user_hash
+    graphType: text
+    measures: 
+    - user_hash
+    - m_subquery_count_sum
+    - m_epoch_sql_wall_time_avg
+    - m_subquery_count_sum
+
+    labels:  
+    - "Total UserHash"
+    - "Total Subquery Count"
+    - "Total Avg Wall Time"
+    - "Total Avg Wall Time"
+    
+
+  summary_total_org_id:
+    title: Total OrganizationalId
+    model: telemetry
+    graphType: text
+    xAxis: organization_id
+    yAxis: m_subquery_count_sum
+
+  summary_total_cube_names:
+    title: Total CubeNames
+    model: telemetry
+    graphType: text
+    xAxis: cube_name
+    yAxis: m_subquery_count_sum
+
+  summary_avg_queries_per_day:
+    title: Avg TotalQueries/Day
+    model: telemetry
+    graphType: text
+    xAxis: query_hour
+    yAxis: m_subquery_count_sum
+
+  summary_success_rate:
+    title: Overall Success Rate
+    model: telemetry
+    graphType: text
+    xAxis: succeeded
+    yAxis: m_subquery_count_sum
+
+  summary_avg_wall_time:
+    title: Overall Avg WallTime
+    model: telemetry
+    graphType: text
+    xAxis: query_hour
     yAxis: m_epoch_sql_wall_time_avg
 
-  subquery_count_by_hour:
-    title: Subquery Count by Hour
+  # KPI Visuals
+  kpi_query_success_rate:
+    title: Query Success Rate
     model: telemetry
-    graphType: bar
+    graphType: line
+    xAxis: query_hour
+    yAxis: succeeded
+
+  kpi_total_queries_per_day:
+    title: TotalQueries per Day
+    model: telemetry
+    graphType: line
     xAxis: query_hour
     yAxis: m_subquery_count_sum
 
-  subquery_count_by_hour_2:
-    title: Subquery Count by Hour 2
+  kpi_response_time:
+    title: ResponseTime(ms)
+    model: telemetry
+    graphType: line
+    xAxis: query_hour
+    yAxis: m_epoch_sql_wall_time_avg
+
+  # Additional Information (Top 10s)
+  top_10_active_users:
+    title: Top 10 Most Active Users
     model: telemetry
     graphType: bar
-    xAxis: query_hour
-    yAxis: m_subquery_count_sum
+    xAxis: m_subquery_count_sum
+    yAxis: user_hash
 
+  top_10_cubes_by_avg_wall_time:
+    title: Top 10 CubeNames by AvgWallTime
+    model: telemetry
+    graphType: bar
+    xAxis: m_epoch_sql_wall_time_avg
+    yAxis: cube_name
+
+  top_10_users_by_avg_wall_time:
+    title: Top 10 UserHash by AvgWallTime
+    model: telemetry
+    graphType: bar
+    xAxis: m_epoch_sql_wall_time_avg
+    yAxis: user_hash
+
+  top_10_orgs_by_avg_wall_time:
+    title: Top 10 OrganizationId by AvgWallTime
+    model: telemetry
+    graphType: bar
+    xAxis: m_epoch_sql_wall_time_avg
+    yAxis: organization_id
+
+  top_10_projects_by_avg_wall_time:
+    title: Top 10 ProjectId by AvgWallTime
+    model: telemetry
+    graphType: bar
+    xAxis: m_epoch_sql_wall_time_avg
+    yAxis: project_id
 
 dashboards:
-  telemetry_overview:
-    title: Telemetry Overview
+  # ============================================================================
+  # COMPREHENSIVE TELEMETRY DASHBOARD
+  # Organized into three tile categories based on Superstore TWB styling
+  # ============================================================================
+  telemetry_comprehensive:
+    title: Telemetry Dashboard
+    description: Comprehensive view of telemetry metrics organized by Summary Statistics, KPIs, and Additional Information
+    
+    # Sizing based on Superstore TWB dashboard patterns (minheight/minwidth)
     size:
-      width: 1000
-      height: 800
-      hSegments: 1
-      vSegments: 2
+      width: 1400
+      height: 900
+      # Grid: 5 columns x 3 rows to accommodate all worksheets
+      hSegments: 5
+      vSegments: 3
+    
+    # Style definitions inspired by Superstore.twb (for documentation/future use)
+    # These styles are based on TWB patterns:
+    #   - Title: Tableau Bold, 14px, #333333
+    #   - Labels: Tableau Regular, 9px, #787878, bold
+    #   - Values: Tableau Bold, 12px, #d3872a (accent)
+    #   - Container: borderStyle solid, borderColor #d7d7d7, bg #ffffff
+    #   - Animation: disabled (ao-off)
+    
     tiles:
-    - worksheet: avg_wall_by_userhash
-      x: 0
-      y: 0
-    - worksheet: subquery_count_by_hour_2
-      x: 0
-      y: 1
+      # ------------------------------------------
+      # ROW 0: Summary Statistics (Top Row)
+      # Text-based summary metrics across top
+      # ------------------------------------------
+      - worksheet: summary_total_user_hash
+        x: 0
+        y: 0
+        category: Summary Statistics
+      - worksheet: summary_total_org_id
+        x: 1
+        y: 0
+        category: Summary Statistics
+      - worksheet: summary_total_cube_names
+        x: 2
+        y: 0
+        category: Summary Statistics
+      - worksheet: summary_avg_queries_per_day
+        x: 3
+        y: 0
+        category: Summary Statistics
+      - worksheet: summary_success_rate
+        x: 4
+        y: 0
+        category: Summary Statistics
+      
+      # ------------------------------------------
+      # ROW 1: KPI Visuals (Middle Row)
+      # Line charts for key performance indicators
+      # Style: markColor #4a76a1 (blue), #d3872a (orange)
+      # ------------------------------------------
+      - worksheet: kpi_query_success_rate
+        x: 0
+        y: 1
+        category: KPI
+      - worksheet: kpi_total_queries_per_day
+        x: 2
+        y: 1
+        category: KPI
+      - worksheet: kpi_response_time
+        x: 4
+        y: 1
+        category: KPI
+      
+      # ------------------------------------------
+      # ROW 2: Additional Information (Bottom Row)
+      # Bar charts for Top 10 rankings
+      # Style: alternating markColor #4a76a1/#d3872a
+      # ------------------------------------------
+      - worksheet: top_10_active_users
+        x: 0
+        y: 2
+        category: Additional Information
+      - worksheet: top_10_cubes_by_avg_wall_time
+        x: 1
+        y: 2
+        category: Additional Information
+      - worksheet: top_10_users_by_avg_wall_time
+        x: 2
+        y: 2
+        category: Additional Information
+      - worksheet: top_10_orgs_by_avg_wall_time
+        x: 3
+        y: 2
+        category: Additional Information
+      - worksheet: top_10_projects_by_avg_wall_time
+        x: 4
+        y: 2
+        category: Additional Information

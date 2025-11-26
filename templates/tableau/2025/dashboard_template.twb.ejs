@@ -145,6 +145,9 @@
   <worksheets>
     <%
       Object.entries(visuals.worksheets).forEach(([worksheetName, worksheet]) => {
+      // =============================================
+      // BAR CHART WORKSHEETS
+      // =============================================
       if (worksheet.graphType == 'bar') { %>
         <worksheet name='<%= worksheet.title %>'>
           <table>
@@ -181,11 +184,132 @@
                 <view>
                   <breakdown value='auto' />
                 </view>
-                <mark class='Automatic' />
+                <mark class='Bar' />
               </pane>
             </panes>
-            <rows>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.xAxis %>]</rows>
-            <cols>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.yAxis %>]</cols>
+            <rows>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.yAxis %>]</rows>
+            <cols>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.xAxis %>]</cols>
+          </table>
+          <simple-id uuid='{<%= crypto.randomUUID()%>}' />
+        </worksheet>
+      <% } 
+      // =============================================
+      // LINE CHART WORKSHEETS (KPIs)
+      // =============================================
+      else if (worksheet.graphType == 'line') { %>
+        <worksheet name='<%= worksheet.title %>'>
+          <table>
+            <view>
+              <datasources>
+                <datasource name='<%= models[worksheet.model].dataSource %>' />
+              </datasources>
+              <datasource-dependencies datasource='<%= models[worksheet.model].dataSource %>'>
+                <column-instance column='[<%= worksheet.xAxis %>]' 
+                  derivation='<%= models[worksheet.model].sql.columns[worksheet.xAxis].aggregation %>' 
+                  name='[<%= worksheet.xAxis %>]' pivot='key'
+                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
+                <column caption='<%= models[worksheet.model].sql.columns[worksheet.xAxis].label %>' 
+                  datatype='<%= models[worksheet.model].sql.columns[worksheet.xAxis].dataType %>' 
+                  name='[<%= worksheet.xAxis %>]' 
+                  role='<%= models[worksheet.model].sql.columns[worksheet.xAxis].role %>' 
+                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
+
+                <column-instance column='[<%= worksheet.yAxis %>]' 
+                  derivation='<%= models[worksheet.model].sql.columns[worksheet.yAxis].aggregation %>' 
+                  name='[<%= worksheet.yAxis %>]' pivot='key'
+                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
+                <column caption='<%= models[worksheet.model].sql.columns[worksheet.yAxis].label %>' 
+                  datatype='<%= models[worksheet.model].sql.columns[worksheet.yAxis].dataType %>' 
+                  name='[<%= worksheet.yAxis %>]' 
+                  role='<%= models[worksheet.model].sql.columns[worksheet.yAxis].role %>' 
+                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
+              </datasource-dependencies>
+              <aggregation value='true' />
+            </view>
+            <style />
+            <panes>
+              <pane selection-relaxation-option='selection-relaxation-allow'>
+                <view>
+                  <breakdown value='auto' />
+                </view>
+                <mark class='Line' />
+              </pane>
+            </panes>
+            <rows>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.yAxis %>]</rows>
+            <cols>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.xAxis %>]</cols>
+          </table>
+          <simple-id uuid='{<%= crypto.randomUUID()%>}' />
+        </worksheet>
+      <% }
+      // =============================================
+      // TEXT WORKSHEETS (Summary Statistics)
+      // =============================================
+      else if (worksheet.graphType == 'text') { %>
+        <worksheet name='<%= worksheet.title %>'>
+          <table>
+            <view>
+              <datasources>
+                <datasource name='<%= models[worksheet.model].dataSource %>' />
+              </datasources>
+              <datasource-dependencies datasource='<%= models[worksheet.model].dataSource %>'>
+                <% if (worksheet.xAxis && worksheet.yAxis) { %>
+                <column-instance column='[<%= worksheet.xAxis %>]' 
+                  derivation='<%= models[worksheet.model].sql.columns[worksheet.xAxis].aggregation %>' 
+                  name='[<%= worksheet.xAxis %>]' pivot='key'
+                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
+                <column caption='<%= models[worksheet.model].sql.columns[worksheet.xAxis].label %>' 
+                  datatype='<%= models[worksheet.model].sql.columns[worksheet.xAxis].dataType %>' 
+                  name='[<%= worksheet.xAxis %>]' 
+                  role='<%= models[worksheet.model].sql.columns[worksheet.xAxis].role %>' 
+                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
+
+                <column-instance column='[<%= worksheet.yAxis %>]' 
+                  derivation='<%= models[worksheet.model].sql.columns[worksheet.yAxis].aggregation %>' 
+                  name='[<%= worksheet.yAxis %>]' pivot='key'
+                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
+                <column caption='<%= models[worksheet.model].sql.columns[worksheet.yAxis].label %>' 
+                  datatype='<%= models[worksheet.model].sql.columns[worksheet.yAxis].dataType %>' 
+                  name='[<%= worksheet.yAxis %>]' 
+                  role='<%= models[worksheet.model].sql.columns[worksheet.yAxis].role %>' 
+                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
+                <% } else if (worksheet.measures) { 
+                  worksheet.measures.forEach((measure, idx) => { %>
+                <column-instance column='[<%= measure %>]' 
+                  derivation='<%= models[worksheet.model].sql.columns[measure].aggregation %>' 
+                  name='[<%= measure %>]' pivot='key'
+                  type='<%= models[worksheet.model].sql.columns[measure].type %>' />
+                <column caption='<%= models[worksheet.model].sql.columns[measure].label %>' 
+                  datatype='<%= models[worksheet.model].sql.columns[measure].dataType %>' 
+                  name='[<%= measure %>]' 
+                  role='<%= models[worksheet.model].sql.columns[measure].role %>' 
+                  type='<%= models[worksheet.model].sql.columns[measure].type %>' />
+                <% })} %>
+              </datasource-dependencies>
+              <aggregation value='true' />
+            </view>
+            <style>
+              <style-rule element='cell'>
+                <format attr='text-align' value='center' />
+                <format attr='font-size' value='14' />
+              </style-rule>
+              <style-rule element='label'>
+                <format attr='font-size' value='9' />
+                <format attr='font-weight' value='bold' />
+              </style-rule>
+            </style>
+            <panes>
+              <pane selection-relaxation-option='selection-relaxation-allow'>
+                <view>
+                  <breakdown value='auto' />
+                </view>
+                <mark class='Text' />
+                <encodings>
+                  <text column='<%= worksheet.yAxis ? "[" + models[worksheet.model].dataSource + "].[" + worksheet.yAxis + "]" : "[" + models[worksheet.model].dataSource + "].[" + (worksheet.measures ? worksheet.measures[0] : "") + "]" %>' />
+                </encodings>
+              </pane>
+            </panes>
+            <rows></rows>
+            <cols><% if (worksheet.xAxis) { %>[<%= models[worksheet.model].dataSource %>].[<%= worksheet.xAxis %>]<% } %></cols>
           </table>
           <simple-id uuid='{<%= crypto.randomUUID()%>}' />
         </worksheet>

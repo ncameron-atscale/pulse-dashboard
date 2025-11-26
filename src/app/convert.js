@@ -1,9 +1,10 @@
-const {default:tableau} = require('../../templates/tableau/functions');
+const tableau = require('../../templates/tableau/functions');
 console.log("Tableau functions loaded:", tableau);
 
 let ejs = require('ejs');
 let fs = require('fs');
 let yaml = require('js-yaml');
+const crypto = require('crypto');
 
 var definition = {};
 try {
@@ -26,7 +27,7 @@ var paths = { projectRoot: __dirname + "/../../",
 
 console.log("Paths:", paths);
 
-let output = ejs.render(template, {functions: {tableau}, paths, visuals:definition, models: definition.models} );
+let output = ejs.render(template, {functions: {tableau}, paths, visuals:definition, models: definition.models, crypto} );
 fs.writeFile(process.argv[4], output, err => {
   if (err) {
     console.error('Error writing file:', err);
