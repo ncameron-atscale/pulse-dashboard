@@ -1,0 +1,394 @@
+attributes:
+  degenerate_dimension:
+    degen_hierarchy:
+    - caption: degen_top_level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: degen folder
+      query_name: degen_top_level
+      level_number: 1
+    - caption: degen_leaf
+      data_type: 130
+      data_type_string: WSTR
+      description: leaf of hierarchy in degenerate dimension
+      folder: degen folder
+      query_name: degen_leaf
+      level_number: 2
+    degen_level_alias:
+    - caption: degen_level_alias
+      data_type: 130
+      data_type_string: WSTR
+      description: degen level alias description
+      folder: Secondary Attribute Folder
+      query_name: degen_level_alias
+      level_number: 1
+    degen_secondary_attribute_mapped_state_id:
+    - caption: degen_secondary_attribute_mapped_state_id
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: degen folder
+      query_name: degen_secondary_attribute_mapped_state_id
+      level_number: 1
+  item_dimension:
+    calc_group:
+    - caption: calc_group
+      data_type: 0
+      data_type_string: EMPTY
+      description: desc
+      folder: folder
+      query_name: calc_group
+      level_number: 0
+    qds_hierarchy:
+    - caption: qds_hierarchy_top
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: qds_hierarchy_top
+      level_number: 1
+    - caption: qds_hierarchy_middle
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: qds_hierarchy_middle
+      level_number: 2
+    - caption: qds_hierarchy_leaf
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: qds_hierarchy_leaf
+      level_number: 3
+  primary item_dimension:
+    primary calc_group:
+    - caption: primary calc_group
+      data_type: 0
+      data_type_string: EMPTY
+      description: desc
+      folder: folder
+      query_name: primary calc_group
+      level_number: 0
+    primary qds_hierarchy:
+    - caption: primary qds_hierarchy_top
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary qds_hierarchy_top
+      level_number: 1
+    - caption: primary qds_hierarchy_middle
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary qds_hierarchy_middle
+      level_number: 2
+    - caption: primary qds_hierarchy_leaf
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary qds_hierarchy_leaf
+      level_number: 3
+  primary snowflake secondary_snowflake snowflake_off_of_snowflake_dim:
+    primary snowflake secondary_snowflake snowflake_off_of_snowflake_dim Hierarchy:
+    - caption: primary snowflake secondary_snowflake snowflake_off_of_snowflake_dim
+        Level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary snowflake secondary_snowflake snowflake_off_of_snowflake_dim
+        Level
+      level_number: 1
+  primary snowflake snowflake_dimension:
+    primary snowflake snowflake_hierarchy:
+    - caption: primary snowflake snowflake_level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary snowflake snowflake_level
+      level_number: 1
+    primary snowflake snowflake_secondary_attribute:
+    - caption: primary snowflake snowflake_secondary_attribute
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary snowflake snowflake_secondary_attribute
+      level_number: 1
+  primary snowflake_dimension_non_roleplay:
+    primary snowflake_dimension_non_roleplay Hierarchy:
+    - caption: primary snowflake_dimension_non_roleplay Level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: primary snowflake_dimension_non_roleplay Level
+      level_number: 1
+  roleplay date_dimension:
+    roleplay calc_group_secondary:
+    - caption: roleplay calc group secondary
+      data_type: 0
+      data_type_string: EMPTY
+      description: desc
+      folder: folder
+      query_name: roleplay calc_group_secondary
+      level_number: 0
+    roleplay date_hierarchy:
+    - caption: roleplay Year
+      data_type: 5
+      data_type_string: FLOAT64
+      description: ''
+      folder: ''
+      query_name: roleplay year
+      level_number: 1
+    - caption: roleplay Half Year
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: roleplay halfyear
+      level_number: 2
+    - caption: roleplay Quarter
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: roleplay Quarter
+      level_number: 3
+    - caption: roleplay Month
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: roleplay Month1
+      level_number: 4
+    - caption: roleplay week
+      data_type: 5
+      data_type_string: FLOAT64
+      description: different key/value pair
+      folder: ''
+      query_name: roleplay week
+      level_number: 5
+    - caption: roleplay date
+      data_type: 135
+      data_type_string: DATETIME
+      description: ''
+      folder: ''
+      query_name: roleplay date
+      level_number: 6
+    roleplay duplicate_date_hierarchy:
+    - caption: roleplay trimester
+      data_type: 5
+      data_type_string: FLOAT64
+      description: ''
+      folder: date folder
+      query_name: roleplay trimester
+      level_number: 1
+    - caption: roleplay date
+      data_type: 135
+      data_type_string: DATETIME
+      description: ''
+      folder: date folder
+      query_name: roleplay date
+      level_number: 2
+    roleplay level_alias:
+    - caption: roleplay level_alias
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: roleplay level_alias
+      level_number: 1
+    roleplay secondary_attribute_from_base_column:
+    - caption: roleplay secondary_attribute_from_base_column
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: Secondary Attribute Folder
+      query_name: roleplay secondary_attribute_from_base_column
+      level_number: 1
+    roleplay secondary_attribute_from_calc_column:
+    - caption: roleplay secondary_attribute_from_calc_column
+      data_type: 133
+      data_type_string: DATE
+      description: secondary attribute off of a calc column
+      folder: ''
+      query_name: roleplay secondary_attribute_from_calc_column
+      level_number: 1
+  snowflake secondary_snowflake snowflake_off_of_snowflake_dim:
+    snowflake secondary_snowflake snowflake_off_of_snowflake_dim Hierarchy:
+    - caption: snowflake secondary_snowflake snowflake_off_of_snowflake_dim Level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: snowflake secondary_snowflake snowflake_off_of_snowflake_dim Level
+      level_number: 1
+  snowflake snowflake_dimension:
+    snowflake snowflake_hierarchy:
+    - caption: snowflake snowflake_level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: snowflake snowflake_level
+      level_number: 1
+    snowflake snowflake_secondary_attribute:
+    - caption: snowflake snowflake_secondary_attribute
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: snowflake snowflake_secondary_attribute
+      level_number: 1
+  snowflake_dimension_non_roleplay:
+    snowflake_dimension_non_roleplay Hierarchy:
+    - caption: snowflake_dimension_non_roleplay Level
+      data_type: 130
+      data_type_string: WSTR
+      description: ''
+      folder: ''
+      query_name: snowflake_dimension_non_roleplay Level
+      level_number: 1
+metrics:
+- agg_type: 1
+  agg_type_string: sum
+  caption: SUM_PRED_UNITS_SOLD
+  data_type: 5
+  data_type_string: FLOAT64
+  description: Sum of predicted values
+  folder: Prediction Features
+  format_string: ''
+  query_name: m_PREDICTED_UNITS_SOLD_sum
+- agg_type: 5
+  agg_type_string: avg
+  caption: AVG_UNITS_SOLD
+  data_type: 14
+  data_type_string: DECIMAL
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_avg
+- agg_type: 2
+  agg_type_string: count
+  caption: NDC_UNITS_SOLD
+  data_type: 20
+  data_type_string: INT8
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_count
+- agg_type: 8
+  agg_type_string: count
+  caption: DC_UNITS_SOLD
+  data_type: 20
+  data_type_string: INT8
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_distinct
+- agg_type: 8
+  agg_type_string: count
+  caption: DCE_UNITS_SOLD
+  data_type: 20
+  data_type_string: INT8
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_distinct_est
+- agg_type: 4
+  agg_type_string: max
+  caption: MAX_UNITS_SOLD
+  data_type: 14
+  data_type_string: DECIMAL
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_max
+- agg_type: 3
+  agg_type_string: min
+  caption: MIN_UNITS_SOLD
+  data_type: 14
+  data_type_string: DECIMAL
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_min
+- agg_type: 0
+  agg_type_string: var
+  caption: POP_STDV_UNITS_SOLD
+  data_type: 5
+  data_type_string: FLOAT64
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_stdv_pop
+- agg_type: 7
+  agg_type_string: std
+  caption: SAMP_STDV_UNITS_SOLD
+  data_type: 5
+  data_type_string: FLOAT64
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_stdv_samp
+- agg_type: 1
+  agg_type_string: sum
+  caption: SUM_UNITS_SOLD
+  data_type: 14
+  data_type_string: DECIMAL
+  description: ''
+  folder: ''
+  format_string: '#.####'
+  query_name: m_UNITS_SOLD_sum
+- agg_type: 0
+  agg_type_string: var
+  caption: POP_VAR_UNITS_SOLD
+  data_type: 5
+  data_type_string: FLOAT64
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_var_pop
+- agg_type: 6
+  agg_type_string: var
+  caption: SAMP_VAR_UNITS_SOLD
+  data_type: 5
+  data_type_string: FLOAT64
+  description: ''
+  folder: ''
+  format_string: ''
+  query_name: m_UNITS_SOLD_var_samp
+- agg_type: 1
+  agg_type_string: sum
+  caption: metrical_attribute
+  data_type: 14
+  data_type_string: DECIMAL
+  description: metrical attribute descr
+  folder: degen folder
+  format_string: ''
+  query_name: metrical_attribute
+- agg_type: 9
+  agg_type_string: calculated
+  caption: calc_from_calc
+  data_type: 5
+  data_type_string: FLOAT64
+  description: ''
+  folder: ''
+  format_string: '#.00,,&quot;M&quot;'
+  query_name: calc_from_calc
+- agg_type: 9
+  agg_type_string: calculated
+  caption: calc_two_fact
+  data_type: 5
+  data_type_string: FLOAT64
+  description: calc referencing measures from two fact tables
+  folder: calculated measures
+  format_string: ''
+  query_name: calc_two_fact
