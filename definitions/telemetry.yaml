@@ -76,59 +76,99 @@ models:
           type: nominal
           aggregation: None
 
+        # Distinct count measures for Summary Statistics
+        m_organization_id_distinct:
+          dataType: integer
+          label: Total Organizations
+          role: measure
+          type: quantitative
+          aggregation: Sum
+
+        m_cube_name_distinct:
+          dataType: integer
+          label: Total Cubes
+          role: measure
+          type: quantitative
+          aggregation: Sum
+
+        m_user_hash_distinct:
+          dataType: integer
+          label: Total Users
+          role: measure
+          type: quantitative
+          aggregation: Sum
+
+        # Success percentage (pre-calculated)
+        cm_query_success_pct:
+          dataType: real
+          label: Query Success Rate (%)
+          role: measure
+          type: quantitative
+          aggregation: Avg
+
+        # Daily query count for calculating average queries per day
+        m_query_id_count:
+          dataType: integer
+          label: Total Queries
+          role: measure
+          type: quantitative
+          aggregation: Sum
+
 worksheets:
-  # Summary Statistics
-  summary_total_user_hash:
-    title: Summary Statistics
+  # Summary Statistics - Single number displays
+  summary_total_orgs:
+    title: Total Organizations
     model: telemetry
     graphType: text
-    measures: 
-    - user_hash
-    - m_subquery_count_sum
-    - m_epoch_sql_wall_time_avg
-    - m_subquery_count_sum
+    measures:
+      - m_organization_id_distinct
+    format: "integer"
+    description: Count of unique organization_id values
 
-    labels:  
-    - "Total UserHash"
-    - "Total Subquery Count"
-    - "Total Avg Wall Time"
-    - "Total Avg Wall Time"
-    
-
-  summary_total_org_id:
-    title: Total OrganizationalId
+  summary_total_cubes:
+    title: Total Cubes
     model: telemetry
     graphType: text
-    xAxis: organization_id
-    yAxis: m_subquery_count_sum
+    measures:
+      - m_cube_name_distinct
+    format: "integer"
+    description: Count of unique cube_name values
 
-  summary_total_cube_names:
-    title: Total CubeNames
+  summary_total_users:
+    title: Total Users
     model: telemetry
     graphType: text
-    xAxis: cube_name
-    yAxis: m_subquery_count_sum
+    measures:
+      - m_user_hash_distinct
+    format: "integer"
+    description: Count of unique user_hash values
 
   summary_avg_queries_per_day:
-    title: Avg TotalQueries/Day
+    title: Avg Queries/Day
     model: telemetry
     graphType: text
-    xAxis: query_hour
-    yAxis: m_subquery_count_sum
+    measures:
+      - m_query_id_count
+    format: "decimal:2"
+    description: Daily average of TotalQueries over the entire time period
 
   summary_success_rate:
-    title: Overall Success Rate
+    title: Success Rate (%)
     model: telemetry
     graphType: text
-    xAxis: succeeded
-    yAxis: m_subquery_count_sum
+    measures:
+      - cm_query_success_pct
+    format: "percent:2"
+    description: Percentage of succeeded queries to two decimal places
 
   summary_avg_wall_time:
-    title: Overall Avg WallTime
+    title: Avg WallTime (ms)
     model: telemetry
     graphType: text
-    xAxis: query_hour
-    yAxis: m_epoch_sql_wall_time_avg
+    measures:
+      - m_epoch_sql_wall_time_avg
+    format: "decimal:2"
+    description: Average WallTime to two decimal places
 
   # KPI Visuals
   kpi_query_success_rate:
@@ -199,10 +239,10 @@ dashboards:
     
     # Sizing based on Superstore TWB dashboard patterns (minheight/minwidth)
     size:
-      width: 1400
+      width: 1680
       height: 900
-      # Grid: 5 columns x 3 rows to accommodate all worksheets
-      hSegments: 5
+      # Grid: 6 columns x 3 rows to accommodate all worksheets
+      hSegments: 6
       vSegments: 3
     
     # Style definitions inspired by Superstore.twb (for documentation/future use)
@@ -218,15 +258,15 @@ dashboards:
       # ROW 0: Summary Statistics (Top Row)
       # Text-based summary metrics across top
       # ------------------------------------------
-      - worksheet: summary_total_user_hash
+      - worksheet: summary_total_orgs
         x: 0
         y: 0
         category: Summary Statistics
-      - worksheet: summary_total_org_id
+      - worksheet: summary_total_cubes
         x: 1
         y: 0
         category: Summary Statistics
-      - worksheet: summary_total_cube_names
+      - worksheet: summary_total_users
         x: 2
         y: 0
         category: Summary Statistics
@@ -236,6 +276,10 @@ dashboards:
         category: Summary Statistics
       - worksheet: summary_success_rate
         x: 4
+        y: 0
+        category: Summary Statistics
+      - worksheet: summary_avg_wall_time
+        x: 5
         y: 0
         category: Summary Statistics
       
