@@ -147,6 +147,7 @@
       Object.entries(visuals.worksheets).forEach(([worksheetName, worksheet]) => {
       // =============================================
       // BAR CHART WORKSHEETS
+      // Note: Top 10 filtering should be applied manually in Tableau Desktop
       // =============================================
       if (worksheet.graphType == 'bar') { %>
         <worksheet name='<%= worksheet.title %>'>
@@ -194,9 +195,14 @@
         </worksheet>
       <% } 
       // =============================================
-      // LINE CHART WORKSHEETS (KPIs)
+      // LINE CHART WORKSHEETS (KPIs) - Weekly x-axis granularity
       // =============================================
-      else if (worksheet.graphType == 'line') { %>
+      else if (worksheet.graphType == 'line') { 
+        const xAxisCol = models[worksheet.model].sql.columns[worksheet.xAxis];
+        const yAxisCol = models[worksheet.model].sql.columns[worksheet.yAxis];
+        // Use Week derivation for datetime columns to show weekly ticks
+        const xAxisDerivation = xAxisCol.dataType === 'datetime' ? 'Week' : xAxisCol.aggregation;
+      %>
         <worksheet name='<%= worksheet.title %>'>
           <table>
             <view>
@@ -205,24 +211,24 @@
               </datasources>
               <datasource-dependencies datasource='<%= models[worksheet.model].dataSource %>'>
                 <column-instance column='[<%= worksheet.xAxis %>]' 
-                  derivation='<%= models[worksheet.model].sql.columns[worksheet.xAxis].aggregation %>' 
+                  derivation='<%= xAxisDerivation %>' 
                   name='[<%= worksheet.xAxis %>]' pivot='key'
-                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
-                <column caption='<%= models[worksheet.model].sql.columns[worksheet.xAxis].label %>' 
-                  datatype='<%= models[worksheet.model].sql.columns[worksheet.xAxis].dataType %>' 
+                  type='<%= xAxisCol.type %>' />
+                <column caption='<%= xAxisCol.label %>' 
+                  datatype='<%= xAxisCol.dataType %>' 
                   name='[<%= worksheet.xAxis %>]' 
-                  role='<%= models[worksheet.model].sql.columns[worksheet.xAxis].role %>' 
-                  type='<%= models[worksheet.model].sql.columns[worksheet.xAxis].type %>' />
+                  role='<%= xAxisCol.role %>' 
+                  type='<%= xAxisCol.type %>' />
 
                 <column-instance column='[<%= worksheet.yAxis %>]' 
-                  derivation='<%= models[worksheet.model].sql.columns[worksheet.yAxis].aggregation %>' 
+                  derivation='<%= yAxisCol.aggregation %>' 
                   name='[<%= worksheet.yAxis %>]' pivot='key'
-                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
-                <column caption='<%= models[worksheet.model].sql.columns[worksheet.yAxis].label %>' 
-                  datatype='<%= models[worksheet.model].sql.columns[worksheet.yAxis].dataType %>' 
+                  type='<%= yAxisCol.type %>' />
+                <column caption='<%= yAxisCol.label %>' 
+                  datatype='<%= yAxisCol.dataType %>' 
                   name='[<%= worksheet.yAxis %>]' 
-                  role='<%= models[worksheet.model].sql.columns[worksheet.yAxis].role %>' 
-                  type='<%= models[worksheet.model].sql.columns[worksheet.yAxis].type %>' />
+                  role='<%= yAxisCol.role %>' 
+                  type='<%= yAxisCol.type %>' />
               </datasource-dependencies>
               <aggregation value='true' />
             </view>
@@ -318,23 +324,36 @@
   </worksheets>
   
   <dashboards>
-    <% Object.entries(visuals.dashboards).forEach(([dashboardName, dashboard]) => { %>
+    <% Object.entries(visuals.dashboards).forEach(([dashboardName, dashboard]) => { 
+      const segmentWidth = dashboard.size.width / dashboard.size.hSegments;
+      const segmentHeight = dashboard.size.height / dashboard.size.vSegments;
+      let zoneId = 0;
+    %>
 
       <dashboard enable-sort-zone-taborder='true' name='<%= dashboard.title %>'>
-        <style />
+        <style>
+          <style-rule element='title'>
+            <format attr='font-weight' value='bold' />
+            <format attr='font-size' value='14' />
+          </style-rule>
+        </style>
         <size maxheight='<%= dashboard.size.height %>' maxwidth='<%= dashboard.size.width %>' 
             minheight='<%= dashboard.size.height %>' minwidth='<%= dashboard.size.width %>' />
         <zones>
 
-          <zone h='100000' id='0' type-v2='layout-basic' w='100000' x='0' y='0'>
-            <% dashboard.tiles.forEach((tile, index) => { %>
+          <zone h='100000' id='<%= zoneId++ %>' type-v2='layout-basic' w='100000' x='0' y='0'>
+            <% /* Worksheet Tiles */ %>
+            <% dashboard.tiles.forEach((tile) => { 
+              const colSpan = tile.colSpan || 1;
+              const rowSpan = tile.rowSpan || 1;
+            %>
               <zone
-                id='<%= (index+1) %>' 
+                id='<%= zoneId++ %>' 
                 name='<%= visuals.worksheets[tile.worksheet].title %>'
-                w='<%= (dashboard.size.width/dashboard.size.hSegments) %>' 
-                h='<%= (dashboard.size.height/dashboard.size.vSegments) %>' 
-                x='<%= tile.x*(dashboard.size.width/dashboard.size.hSegments) %>' 
-                y='<%= tile.y*(dashboard.size.height/dashboard.size.vSegments) %>'/>
+                w='<%= colSpan * segmentWidth %>' 
+                h='<%= rowSpan * segmentHeight %>' 
+                x='<%= tile.x * segmentWidth %>' 
+                y='<%= tile.y * segmentHeight %>'/>
             <% }) %>
 
           </zone>

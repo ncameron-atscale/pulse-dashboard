@@ -413,7 +413,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{c56a452f-389e-4669-bcaf-ab9b3c9c528f}' />
+          <simple-id uuid='{aa403938-7dc7-4337-b072-0a72d2d94e7c}' />
         </worksheet>
       
     
@@ -462,7 +462,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{6edb997a-6daa-4846-adf9-4bb6f07b018a}' />
+          <simple-id uuid='{e648add5-2eff-42fc-909a-9d0b59a25bd0}' />
         </worksheet>
       
     
@@ -511,7 +511,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{969d63cf-60fd-4e51-929b-46bc75becc9a}' />
+          <simple-id uuid='{4e7d6ea4-3165-4065-81a1-436dfee47083}' />
         </worksheet>
       
     
@@ -560,7 +560,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{0555849b-161a-43bd-86b1-3db047132ee7}' />
+          <simple-id uuid='{df774ef6-0f61-48b0-8f8a-bae1eb1da3fa}' />
         </worksheet>
       
     
@@ -609,7 +609,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{1c8b0b64-6080-4c28-8d56-56f5f506aab0}' />
+          <simple-id uuid='{98f774a8-817d-4602-a2cc-aec0afd86d71}' />
         </worksheet>
       
     
@@ -658,7 +658,7 @@
             <rows></rows>
             <cols></cols>
           </table>
-          <simple-id uuid='{e3ffddcc-6df1-42d2-b396-5e94387e0196}' />
+          <simple-id uuid='{39a75b5d-0fdd-43b7-b029-c869f99ed3ca}' />
         </worksheet>
       
     
@@ -670,7 +670,7 @@
               </datasources>
               <datasource-dependencies datasource='ats_connection'>
                 <column-instance column='[query_hour]' 
-                  derivation='None' 
+                  derivation='Week' 
                   name='[query_hour]' pivot='key'
                   type='ordinal' />
                 <column caption='Query Hour' 
@@ -703,7 +703,7 @@
             <rows>[ats_connection].[succeeded]</rows>
             <cols>[ats_connection].[query_hour]</cols>
           </table>
-          <simple-id uuid='{da868cbe-eea2-47df-a369-a03ae468ae94}' />
+          <simple-id uuid='{476a63ae-d7a7-48a3-88ea-6ef3365e13c2}' />
         </worksheet>
       
     
@@ -715,7 +715,7 @@
               </datasources>
               <datasource-dependencies datasource='ats_connection'>
                 <column-instance column='[query_hour]' 
-                  derivation='None' 
+                  derivation='Week' 
                   name='[query_hour]' pivot='key'
                   type='ordinal' />
                 <column caption='Query Hour' 
@@ -748,7 +748,7 @@
             <rows>[ats_connection].[m_subquery_count_sum]</rows>
             <cols>[ats_connection].[query_hour]</cols>
           </table>
-          <simple-id uuid='{d1c2ba2b-25df-4826-9bee-38a4277b3ad7}' />
+          <simple-id uuid='{447cb9ef-dbf4-4994-873a-40a9e20192a1}' />
         </worksheet>
       
     
@@ -760,7 +760,7 @@
               </datasources>
               <datasource-dependencies datasource='ats_connection'>
                 <column-instance column='[query_hour]' 
-                  derivation='None' 
+                  derivation='Week' 
                   name='[query_hour]' pivot='key'
                   type='ordinal' />
                 <column caption='Query Hour' 
@@ -793,7 +793,7 @@
             <rows>[ats_connection].[m_epoch_sql_wall_time_avg]</rows>
             <cols>[ats_connection].[query_hour]</cols>
           </table>
-          <simple-id uuid='{fc6f6c6d-6fd0-4a87-94ad-97b6dd08fe17}' />
+          <simple-id uuid='{0d94164c-8798-45e6-8e8a-2ce365a09034}' />
         </worksheet>
       
     
@@ -838,7 +838,7 @@
             <rows>[ats_connection].[user_hash]</rows>
             <cols>[ats_connection].[m_subquery_count_sum]</cols>
           </table>
-          <simple-id uuid='{da4f8afc-72d0-48da-942e-a8e03249939c}' />
+          <simple-id uuid='{289d31e5-a057-47db-af2c-5010b2aec6f6}' />
         </worksheet>
       
     
@@ -883,7 +883,7 @@
             <rows>[ats_connection].[cube_name]</rows>
             <cols>[ats_connection].[m_epoch_sql_wall_time_avg]</cols>
           </table>
-          <simple-id uuid='{a9dda07f-f39b-41e2-99c9-f452fa9c2155}' />
+          <simple-id uuid='{8e606d5a-b177-4659-ae3a-10d44d87fb87}' />
         </worksheet>
       
     
@@ -928,7 +928,7 @@
             <rows>[ats_connection].[user_hash]</rows>
             <cols>[ats_connection].[m_epoch_sql_wall_time_avg]</cols>
           </table>
-          <simple-id uuid='{f024ef2c-43ae-468f-8288-4b3f2a075db3}' />
+          <simple-id uuid='{70080fbb-c017-412e-aa36-fa4590849775}' />
         </worksheet>
       
     
@@ -973,7 +973,7 @@
             <rows>[ats_connection].[organization_id]</rows>
             <cols>[ats_connection].[m_epoch_sql_wall_time_avg]</cols>
           </table>
-          <simple-id uuid='{96cd74ca-ee42-49d9-9024-60e7e1c8aba3}' />
+          <simple-id uuid='{d472084a-b259-48c1-9291-df3c3e9f890c}' />
         </worksheet>
       
     
@@ -1018,7 +1018,7 @@
             <rows>[ats_connection].[project_id]</rows>
             <cols>[ats_connection].[m_epoch_sql_wall_time_avg]</cols>
           </table>
-          <simple-id uuid='{127fbe3f-651b-4d00-9ab0-fb1e7db47a99}' />
+          <simple-id uuid='{64c33b6b-6234-4ffe-81b2-25e952113aa1}' />
         </worksheet>
       
     
@@ -1028,129 +1028,135 @@
     
 
       <dashboard enable-sort-zone-taborder='true' name='Telemetry Dashboard'>
-        <style />
-        <size maxheight='900' maxwidth='1680' 
-            minheight='900' minwidth='1680' />
+        <style>
+          <style-rule element='title'>
+            <format attr='font-weight' value='bold' />
+            <format attr='font-size' value='14' />
+          </style-rule>
+        </style>
+        <size maxheight='4600' maxwidth='1800' 
+            minheight='4600' minwidth='1800' />
         <zones>
 
           <zone h='100000' id='0' type-v2='layout-basic' w='100000' x='0' y='0'>
             
+            
               <zone
                 id='1' 
-                name='Total Organizations'
-                w='280' 
-                h='300' 
+                name='Total Users'
+                w='600' 
+                h='200' 
                 x='0' 
                 y='0'/>
             
               <zone
                 id='2' 
-                name='Total Cubes'
-                w='280' 
-                h='300' 
-                x='280' 
+                name='Total Organizations'
+                w='600' 
+                h='200' 
+                x='600' 
                 y='0'/>
             
               <zone
                 id='3' 
-                name='Total Users'
-                w='280' 
-                h='300' 
-                x='560' 
+                name='Total Cubes'
+                w='600' 
+                h='200' 
+                x='1200' 
                 y='0'/>
             
               <zone
                 id='4' 
                 name='Avg Queries/Day'
-                w='280' 
-                h='300' 
-                x='840' 
-                y='0'/>
+                w='600' 
+                h='200' 
+                x='0' 
+                y='200'/>
             
               <zone
                 id='5' 
                 name='Success Rate (%)'
-                w='280' 
-                h='300' 
-                x='1120' 
-                y='0'/>
+                w='600' 
+                h='200' 
+                x='600' 
+                y='200'/>
             
               <zone
                 id='6' 
                 name='Avg WallTime (ms)'
-                w='280' 
-                h='300' 
-                x='1400' 
-                y='0'/>
+                w='600' 
+                h='200' 
+                x='1200' 
+                y='200'/>
             
               <zone
                 id='7' 
                 name='Query Success Rate'
-                w='280' 
-                h='300' 
+                w='1800' 
+                h='500' 
                 x='0' 
-                y='300'/>
+                y='400'/>
             
               <zone
                 id='8' 
                 name='TotalQueries per Day'
-                w='280' 
-                h='300' 
-                x='560' 
-                y='300'/>
+                w='1800' 
+                h='500' 
+                x='0' 
+                y='900'/>
             
               <zone
                 id='9' 
                 name='ResponseTime(ms)'
-                w='280' 
-                h='300' 
-                x='1120' 
-                y='300'/>
+                w='1800' 
+                h='500' 
+                x='0' 
+                y='1400'/>
             
               <zone
                 id='10' 
                 name='Top 10 Most Active Users'
-                w='280' 
-                h='300' 
+                w='1800' 
+                h='500' 
                 x='0' 
-                y='600'/>
+                y='1900'/>
             
               <zone
                 id='11' 
                 name='Top 10 CubeNames by AvgWallTime'
-                w='280' 
-                h='300' 
-                x='280' 
-                y='600'/>
+                w='1800' 
+                h='500' 
+                x='0' 
+                y='2400'/>
             
               <zone
                 id='12' 
                 name='Top 10 UserHash by AvgWallTime'
-                w='280' 
-                h='300' 
-                x='560' 
-                y='600'/>
+                w='1800' 
+                h='500' 
+                x='0' 
+                y='2900'/>
             
               <zone
                 id='13' 
                 name='Top 10 OrganizationId by AvgWallTime'
-                w='280' 
-                h='300' 
-                x='840' 
-                y='600'/>
+                w='1800' 
+                h='500' 
+                x='0' 
+                y='3400'/>
             
               <zone
                 id='14' 
                 name='Top 10 ProjectId by AvgWallTime'
-                w='280' 
-                h='300' 
-                x='1120' 
-                y='600'/>
+                w='1800' 
+                h='700' 
+                x='0' 
+                y='3900'/>
             
 
           </zone>
         </zones>
-        <simple-id uuid='{00b0a637-8892-4a3a-b9ee-77ee2be51bfb}' />
+        <simple-id uuid='{a78baa92-7ca1-4ed6-8569-3879b3588846}' />
       </dashboard>
     
   </dashboards>
@@ -1178,7 +1184,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{0c6eaed1-9443-4670-b3ec-458c17174607}' />
+        <simple-id uuid='{2ade7c2d-2917-4c49-b920-72703b20cab6}' />
       </window>
     
       <window class='worksheet'  name='summary_total_cubes'>
@@ -1202,7 +1208,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{1d900eba-f8a2-4138-b2ff-62959923f58f}' />
+        <simple-id uuid='{af3eaa8b-9a84-4742-beac-2badedcb71d7}' />
       </window>
     
       <window class='worksheet'  name='summary_total_users'>
@@ -1226,7 +1232,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{db23177d-d84b-4fd4-9c08-d0ffd666861c}' />
+        <simple-id uuid='{f7d743f8-ecdf-4b9e-9190-2fc48111f308}' />
       </window>
     
       <window class='worksheet'  name='summary_avg_queries_per_day'>
@@ -1250,7 +1256,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{63b1a05a-9483-43a0-80f0-49ead317c5b8}' />
+        <simple-id uuid='{a34452d9-c4f9-4ecf-85d0-79e06627c1e6}' />
       </window>
     
       <window class='worksheet'  name='summary_success_rate'>
@@ -1274,7 +1280,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{2e347d3f-2099-43f5-9802-dbae1bf33887}' />
+        <simple-id uuid='{b59cd923-2e34-4f81-bce9-9f3f0e071383}' />
       </window>
     
       <window class='worksheet'  name='summary_avg_wall_time'>
@@ -1298,7 +1304,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{b06f5946-9c8e-499a-8e1f-37e797424362}' />
+        <simple-id uuid='{f01fe2a0-ca55-44bf-b948-4ce6ba9ed887}' />
       </window>
     
       <window class='worksheet'  name='kpi_query_success_rate'>
@@ -1322,7 +1328,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{a53c4916-d5ae-4df0-a320-535df4ed4107}' />
+        <simple-id uuid='{bd7078d0-4542-4c44-86da-c9906dfc84c2}' />
       </window>
     
       <window class='worksheet'  name='kpi_total_queries_per_day'>
@@ -1346,7 +1352,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{546631e1-5c33-43f7-93f6-f00a2051d7ae}' />
+        <simple-id uuid='{b85fe71c-d7fa-4f11-bf18-260b88533cea}' />
       </window>
     
       <window class='worksheet'  name='kpi_response_time'>
@@ -1370,7 +1376,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{952c56c5-282a-49b7-b096-23c528c96bd0}' />
+        <simple-id uuid='{a3e61d80-9549-43e3-a177-e0f784d5cfd4}' />
       </window>
     
       <window class='worksheet'  name='top_10_active_users'>
@@ -1394,7 +1400,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{90cf1c7c-82da-479a-9370-8f66f63a3c00}' />
+        <simple-id uuid='{11f4b76c-8e95-48e8-9d44-ca2c03c6d025}' />
       </window>
     
       <window class='worksheet'  name='top_10_cubes_by_avg_wall_time'>
@@ -1418,7 +1424,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{83d5863e-ff35-4162-a2e8-361fcc901fe6}' />
+        <simple-id uuid='{891df358-9771-4cf0-aee7-371183c15236}' />
       </window>
     
       <window class='worksheet'  name='top_10_users_by_avg_wall_time'>
@@ -1442,7 +1448,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{fe5349f4-281c-4524-ab0e-0adece154a69}' />
+        <simple-id uuid='{a8d9bcbb-1e56-49ef-9f29-11a5d115ec09}' />
       </window>
     
       <window class='worksheet'  name='top_10_orgs_by_avg_wall_time'>
@@ -1466,7 +1472,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{b5d2fa77-f477-44be-96a4-ae6679c7c4a2}' />
+        <simple-id uuid='{04aeac19-a36a-4fbd-91ed-0e9e94626968}' />
       </window>
     
       <window class='worksheet'  name='top_10_projects_by_avg_wall_time'>
@@ -1490,7 +1496,7 @@
             </strip>
           </edge>
         </cards>
-        <simple-id uuid='{d985181d-24d4-4368-838e-887c317508a9}' />
+        <simple-id uuid='{084e2051-b6cb-4ee9-896a-ec24d503d550}' />
       </window>
     
 
@@ -1499,11 +1505,11 @@
       <window class='dashboard' maximized='true' name='Telemetry Dashboard'>
         <viewpoints>
           
+            <viewpoint name='Total Users' />
+          
             <viewpoint name='Total Organizations' />
           
             <viewpoint name='Total Cubes' />
-          
-            <viewpoint name='Total Users' />
           
             <viewpoint name='Avg Queries/Day' />
           
@@ -1529,7 +1535,7 @@
           
         </viewpoints>
         <active id='-1' />
-        <simple-id uuid='{2b8baf67-6123-4c95-b39f-3ba191bb64c9}' />
+        <simple-id uuid='{80d5da3a-b518-4818-a021-96d3c501eaac}' />
       </window>
     
 

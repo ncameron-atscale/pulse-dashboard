@@ -231,98 +231,121 @@ worksheets:
 dashboards:
   # ============================================================================
   # COMPREHENSIVE TELEMETRY DASHBOARD
-  # Organized into three tile categories based on Superstore TWB styling
+  # Layout: Summary Statistics (3x2 grid at top), KPI and Additional Info stacked vertically
+  # Note: Section headers (Summary Statistics, KPI, Additional Information) should be 
+  #       added manually in Tableau Desktop with bold formatting
   # ============================================================================
   telemetry_comprehensive:
     title: Telemetry Dashboard
     description: Comprehensive view of telemetry metrics organized by Summary Statistics, KPIs, and Additional Information
     
-    # Sizing based on Superstore TWB dashboard patterns (minheight/minwidth)
+    # Sizing adjusted for vertical stacking layout
+    # KPI + Additional Information = 4200px total height
     size:
-      width: 1680
-      height: 900
-      # Grid: 6 columns x 3 rows to accommodate all worksheets
-      hSegments: 6
-      vSegments: 3
-    
-    # Style definitions inspired by Superstore.twb (for documentation/future use)
-    # These styles are based on TWB patterns:
-    #   - Title: Tableau Bold, 14px, #333333
-    #   - Labels: Tableau Regular, 9px, #787878, bold
-    #   - Values: Tableau Bold, 12px, #d3872a (accent)
-    #   - Container: borderStyle solid, borderColor #d7d7d7, bg #ffffff
-    #   - Animation: disabled (ao-off)
+      width: 1800
+      height: 4600
+      # Grid: 3 columns for summary (600px each), 46 vertical segments (100px each)
+      hSegments: 3
+      vSegments: 46
     
     tiles:
       # ------------------------------------------
-      # ROW 0: Summary Statistics (Top Row)
-      # Text-based summary metrics across top
+      # SUMMARY STATISTICS (3x2 grid at top)
+      # Each cell: 600px wide x 200px tall
+      # Row 1: Users | Organizations | Cubes
+      # Row 2: Avg Queries | Success Rate | Avg WallTime
       # ------------------------------------------
-      - worksheet: summary_total_orgs
+      - worksheet: summary_total_users
         x: 0
         y: 0
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
-      - worksheet: summary_total_cubes
+      - worksheet: summary_total_orgs
         x: 1
         y: 0
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
-      - worksheet: summary_total_users
+      - worksheet: summary_total_cubes
         x: 2
         y: 0
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
       - worksheet: summary_avg_queries_per_day
-        x: 3
-        y: 0
+        x: 0
+        y: 2
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
       - worksheet: summary_success_rate
-        x: 4
-        y: 0
+        x: 1
+        y: 2
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
       - worksheet: summary_avg_wall_time
-        x: 5
-        y: 0
+        x: 2
+        y: 2
+        colSpan: 1
+        rowSpan: 2
         category: Summary Statistics
       
       # ------------------------------------------
-      # ROW 1: KPI Visuals (Middle Row)
-      # Line charts for key performance indicators
-      # Style: markColor #4a76a1 (blue), #d3872a (orange)
+      # KPI VISUALS (Vertically stacked)
+      # Each chart: 1800px wide x 500px tall (1500px total)
       # ------------------------------------------
       - worksheet: kpi_query_success_rate
         x: 0
-        y: 1
+        y: 4
+        colSpan: 3
+        rowSpan: 5
         category: KPI
       - worksheet: kpi_total_queries_per_day
-        x: 2
-        y: 1
+        x: 0
+        y: 9
+        colSpan: 3
+        rowSpan: 5
         category: KPI
       - worksheet: kpi_response_time
-        x: 4
-        y: 1
+        x: 0
+        y: 14
+        colSpan: 3
+        rowSpan: 5
         category: KPI
       
       # ------------------------------------------
-      # ROW 2: Additional Information (Bottom Row)
-      # Bar charts for Top 10 rankings
-      # Style: alternating markColor #4a76a1/#d3872a
+      # ADDITIONAL INFORMATION (Vertically stacked)
+      # Top 10 bar charts: 1800px wide x 500-700px tall (2700px total)
       # ------------------------------------------
       - worksheet: top_10_active_users
         x: 0
-        y: 2
+        y: 19
+        colSpan: 3
+        rowSpan: 5
         category: Additional Information
       - worksheet: top_10_cubes_by_avg_wall_time
-        x: 1
-        y: 2
+        x: 0
+        y: 24
+        colSpan: 3
+        rowSpan: 5
         category: Additional Information
       - worksheet: top_10_users_by_avg_wall_time
-        x: 2
-        y: 2
+        x: 0
+        y: 29
+        colSpan: 3
+        rowSpan: 5
         category: Additional Information
       - worksheet: top_10_orgs_by_avg_wall_time
-        x: 3
-        y: 2
+        x: 0
+        y: 34
+        colSpan: 3
+        rowSpan: 5
         category: Additional Information
       - worksheet: top_10_projects_by_avg_wall_time
-        x: 4
-        y: 2
+        x: 0
+        y: 39
+        colSpan: 3
+        rowSpan: 7
         category: Additional Information
