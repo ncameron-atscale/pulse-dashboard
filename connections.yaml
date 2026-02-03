@@ -1,0 +1,21 @@
+
+users:
+  admin:
+    username: admin
+    password: "@Scale800"
+
+connections:
+  ats_connection:
+    installer: true
+    mdx:
+      url: http://template.atscale-se-demo.com
+      user: admin
+      organization_id: default
+      catalog_name: Telemetry
+    sql:
+      dialect: postgres
+      port: 15432
+      server: class-i.training.atscale-se-demo.com
+      database: atscale
+      schema: Telemetry
+      user: admin
