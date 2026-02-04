@@ -1,0 +1,8 @@
+<%  
+  ref.fs.mkdirSync('output/pbi', { recursive: true });
+
+  Object.entries(models).forEach(([modelName, model]) => {
+    console.log("Generating PBI for model:", modelName);
+    functions.writeTemplateFromRepo("pbi/simple.ejs", {...ref, modelName, model}, 'output/pbi/' + modelName + '.txt');
+  });
+  %>

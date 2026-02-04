@@ -4,115 +4,16 @@ title: Telemetry Dashboard (Tableau Template)
 description: Template for building a Tableau dashboard mirroring the app's KPIs and
   visualizations.
 
-connections:
-  ats_connection:
-    connection:
-      type: jdbc
-      url: "{baseUrl}/api/v1/telemetry?from={from}&to={to}&segment={segment}"
+# -- Project Specific
+# connections.yaml
+# models.yaml (mdx + sql columns): Auto generated
+# aliases.yaml (aliases for measures) : Optional, recommended for AtScale PS team to use
 
+# -- Functional Specific / Visualizations
+# telemetry.yaml (worksheet definitions)
 
-models:
-  telemetry:
-    dataSource: ats_connection
-    sql:
-      tableName: Telemetry
-      columns:
-
-        user_hash:
-          dataType: string
-          label: User Hash
-          role: dimension
-          type: nominal
-          # This field must be title case and will break TWB; needs investigation
-          aggregation: None
-
-        m_epoch_sql_wall_time_avg:
-          dataType: real
-          label: M Epoch Sql Wall Time Avg
-          role: measure
-          type: quantitative
-          # This field must be title case and will break TWB; needs investigation
-          aggregation: Avg
-
-        m_subquery_count_sum:
-          dataType: integer
-          label: M Subquery Count Sum
-          role: measure
-          type: quantitative
-          aggregation: Sum
-
-        query_hour:
-          dataType: datetime
-          label: Query Hour
-          role: dimension
-          type: ordinal
-          aggregation: None
-
-        organization_id:
-          dataType: string
-          label: Organization Id
-          role: dimension
-          type: nominal
-          aggregation: None
-
-        cube_name:
-          dataType: string
-          label: Cube Name
-          role: dimension
-          type: nominal
-          aggregation: None
-
-        project_id:
-          dataType: string
-          label: Project Id
-          role: dimension
-          type: nominal
-          aggregation: None
-
-        succeeded:
-          dataType: string
-          label: Succeeded
-          role: dimension
-          type: nominal
-          aggregation: None
-
-        # Distinct count measures for Summary Statistics
-        m_organization_id_distinct:
-          dataType: integer
-          label: Total Organizations
-          role: measure
-          type: quantitative
-          aggregation: Sum
-
-        m_cube_name_distinct:
-          dataType: integer
-          label: Total Cubes
-          role: measure
-          type: quantitative
-          aggregation: Sum
-
-        m_user_hash_distinct:
-          dataType: integer
-          label: Total Users
-          role: measure
-          type: quantitative
-          aggregation: Sum
-
-        # Success percentage (pre-calculated)
-        cm_query_success_pct:
-          dataType: real
-          label: Query Success Rate (%)
-          role: measure
-          type: quantitative
-          aggregation: Avg
-
-        # Daily query count for calculating average queries per day
-        m_query_id_count:
-          dataType: integer
-          label: Total Queries
-          role: measure
-          type: quantitative
-          aggregation: Sum
+# -- BI Tool Specific - Should not be modified unless new BI tool
+# tableau.yaml (worksheet interpretation)
 
 worksheets:
   # Summary Statistics - Single number displays

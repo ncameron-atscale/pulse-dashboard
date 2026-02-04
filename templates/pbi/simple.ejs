@@ -1,0 +1,7 @@
+
+<%= modelName %>
+<%  
+    Object.entries(model.sql.columns).forEach(([columnName, column]) => {
+  %>
+    <%= columnName %>
+<% }) %>
